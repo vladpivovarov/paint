@@ -1,0 +1,164 @@
+#canvas {
+	display: block;
+}
+
+.settings {
+	position: absolute;
+	top: 20px;
+	right: 60px;
+	padding: 0px 10px;
+	height: 40px;
+	line-height: 40px;
+	text-transform: uppercase;
+	border-radius: 10px;
+	border: 2px solid black;
+	opacity: 1;
+	transition: all .2s;
+	&:hover {
+		opacity: .95;
+		background: rgba(#000, .8);
+		color: #fff;
+		cursor: pointer;
+	}
+}
+
+.clear {
+	position: absolute;
+	top: 20px;
+	right: 10px;
+	padding: 0px 13px;
+	height: 40px;
+	line-height: 37px;
+	font-size: 20px;
+	border: 2px solid black;
+	border-radius: 10px;
+	opacity: 1;
+	transition: all .2s;
+	&:hover {
+		opacity: .95;
+		background: rgba(#000, .8);
+		color: #fff;
+		cursor: pointer;
+	}
+}
+
+.modal {
+	position: absolute;
+	top: -100%;
+	left: 50%;
+	width: 280px;
+	transform: translate(-50%,-50%);
+	opacity: 0;
+	border: 2px solid black;
+	border-radius: 10px;
+	background: rgba(#000, .8);
+	color: #fff;
+}
+
+.modal_active {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	opacity: 1;
+	transition: all .5s;
+}
+
+.modal__head {
+	height: 40px;
+	display: flex;
+	justify-content: space-between;
+	border-bottom: 2px solid black;
+}
+
+.modal__btn-close {
+	line-height: 40px;
+	flex-basis: 40px;
+	text-align: center;
+	border-left: 2px solid black;
+	border-radius: 0 7px 0 0;
+	opacity: .95;
+	background: rgba(#000, .8);
+	color: #fff;
+	cursor: pointer;
+}
+
+.modal__title {
+	flex: 1;
+	line-height: 40px;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.modal__body {
+	padding: 10px;
+}
+
+.colors {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.colors__items {
+	flex: 1 1 35px;
+	height: 35px;
+	border: 1px solid gray;
+	line-height: 35px;
+	text-align: center;
+	font-size: 0.9rem;
+	cursor:pointer;
+}
+
+ul.modal__colors {
+	margin-bottom: 7px;
+}
+
+.modal__subtitle {
+	margin-bottom: 5px;
+}
+
+.red {
+	background: #fe3e3d;
+}
+.orange {
+	background: #fe8802;
+}
+.orange2 {
+	background: #febb2f;
+}
+.green {
+	background: #98cb00;
+}
+.blue {
+	background: #009acc;
+}
+.blue2 {
+	background: #2cb4e6;
+}
+.pink {
+	background: #ef96e4;
+}
+.pink2 {
+	background: #e82f73;
+}
+.yellow {
+	background: #fef220;
+}
+.gray {
+	background: #ebecf2;
+}
+.gray2 {
+	background: #726e69;
+}
+
+.gray3 {
+	background: #3e3e3e;
+}
+
+.black {
+	background: #000;
+}
+
+.white {
+	background: #fff;
+}

@@ -1,0 +1,36 @@
+extends ../template.pug
+
+block content
+	canvas(id="canvas") Упс.. Пожалуйста установите браузер поновее!
+	.settings Settings
+	.clear(title="clear all") x
+	.modal
+		.modal__head
+			.modal__title Settings
+			.modal__btn-close(title="close") x
+		.modal__body
+			.modal__subtitle Color
+			ul.colors.modal__colors
+				li(color="#fe3e3d").cls.colors__items.red
+				li(color="#fef220").cls.colors__items.yellow
+				li(color="#fe8802").cls.colors__items.orange
+				li(color="#febb2f").cls.colors__items.orange2
+				li(color="#98cb00").cls.colors__items.green
+				li(color="#009acc").cls.colors__items.blue
+				li(color="#2cb4e6").cls.colors__items.blue2
+				li(color="#ef96e4").cls.colors__items.pink
+				li(color="#e82f73").cls.colors__items.pink2
+				li(color="#ebecf2").cls.colors__items.gray
+				li(color="#726e69").cls.colors__items.gray2
+				li(color="#3e3e3e").cls.colors__items.gray3
+				li(color="#000").cls.colors__items.black
+				li(color="#fff").cls.colors__items.white
+			.modal__subtitle Line size
+			ul.colors.modal__colors
+				li.nmr.colors__items 1
+				li.nmr.colors__items 2
+				li.nmr.colors__items 4
+				li.nmr.colors__items 8
+				li.nmr.colors__items 16
+				li.nmr.colors__items 32
+				li.nmr.colors__items 64
