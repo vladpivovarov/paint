@@ -10,9 +10,9 @@ import {
 
 
 var canvas = document.getElementById("canvas");
+
 document.addEventListener("DOMContentLoaded", (e) => {
 	canvasPaint(canvas);
-	console.log("dom loaded");
 })
 
 

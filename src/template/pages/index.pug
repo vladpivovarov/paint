@@ -2,12 +2,17 @@ extends ../template.pug
 
 block content
 	canvas(id="canvas") Упс.. Пожалуйста установите браузер поновее!
-	.settings Settings
-	.clear(title="clear all") x
+	.settings(title="settings") 
+		i(class="fa fa-cog")
+	.clear(title="clear all") 
+		i(class="fa fa-times")
+	.save(title="save") 
+		i(class="fa fa-download")
 	.modal
 		.modal__head
 			.modal__title Settings
-			.modal__btn-close(title="close") x
+			.modal__btn-close(title="close") 
+				i(class="fa fa-times")
 		.modal__body
 			.modal__subtitle Color
 			ul.colors.modal__colors
@@ -25,7 +30,7 @@ block content
 				li(color="#3e3e3e").cls.colors__items.gray3
 				li(color="#000").cls.colors__items.black
 				li(color="#fff").cls.colors__items.white
-			.modal__subtitle Line size
+			.modal__subtitle Size
 			ul.colors.modal__colors
 				li.nmr.colors__items 1
 				li.nmr.colors__items 2
@@ -34,3 +39,7 @@ block content
 				li.nmr.colors__items 16
 				li.nmr.colors__items 32
 				li.nmr.colors__items 64
+			.modal__subtitle Text
+			.modal__input-block
+				input.modal__input(name="text")
+				button.modal__place place

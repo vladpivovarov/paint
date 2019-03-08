@@ -5,17 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <link rel="stylesheet" href="./assets/style/foundation.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"/>
     <link rel="stylesheet" href="./assets/style/main.min.css"/>
     <title>PaintByValdemar</title>
   </head>
   <body>
     <canvas id="canvas">Упс.. Пожалуйста установите браузер поновее!</canvas>
-    <div class="settings">Settings</div>
-    <div class="clear" title="clear all">x</div>
+    <div class="settings" title="settings"> <i class="fa fa-cog"></i></div>
+    <div class="clear" title="clear all"> <i class="fa fa-times"></i></div>
+    <div class="save" title="save"> <i class="fa fa-download"></i></div>
     <div class="modal">
       <div class="modal__head">
         <div class="modal__title">Settings</div>
-        <div class="modal__btn-close" title="close">x</div>
+        <div class="modal__btn-close" title="close"> <i class="fa fa-times"></i></div>
       </div>
       <div class="modal__body">
         <div class="modal__subtitle">Color</div>
@@ -35,7 +37,7 @@
           <li class="cls colors__items black" color="#000"></li>
           <li class="cls colors__items white" color="#fff"></li>
         </ul>
-        <div class="modal__subtitle">Line size</div>
+        <div class="modal__subtitle">Size</div>
         <ul class="colors modal__colors">
           <li class="nmr colors__items">1</li>
           <li class="nmr colors__items">2</li>
@@ -45,6 +47,11 @@
           <li class="nmr colors__items">32</li>
           <li class="nmr colors__items">64</li>
         </ul>
+        <div class="modal__subtitle">Text</div>
+        <div class="modal__input-block">
+          <input class="modal__input" name="text"/>
+          <button class="modal__place">place</button>
+        </div>
       </div>
     </div>
     <script src="./assets/scripts/main.js"></script>

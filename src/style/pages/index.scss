@@ -5,7 +5,7 @@
 .settings {
 	position: absolute;
 	top: 20px;
-	right: 60px;
+	right: 110px;
 	padding: 0px 10px;
 	height: 40px;
 	line-height: 40px;
@@ -14,6 +14,7 @@
 	border: 2px solid black;
 	opacity: 1;
 	transition: all .2s;
+	z-index: 1;
 	&:hover {
 		opacity: .95;
 		background: rgba(#000, .8);
@@ -26,14 +27,36 @@
 	position: absolute;
 	top: 20px;
 	right: 10px;
-	padding: 0px 13px;
+	padding: 0px 12.5px;
 	height: 40px;
-	line-height: 37px;
-	font-size: 20px;
-	border: 2px solid black;
+	line-height: 40px;
+	text-transform: uppercase;
 	border-radius: 10px;
+	border: 2px solid black;
 	opacity: 1;
 	transition: all .2s;
+	z-index: 1;
+	&:hover {
+		opacity: .95;
+		background: rgba(#000, .8);
+		color: #fff;
+		cursor: pointer;
+	}
+}
+
+.save {
+	position: absolute;
+	top: 20px;
+	right: 60px;
+	padding: 0px 10px;
+	height: 40px;
+	line-height: 40px;
+	text-transform: uppercase;
+	border-radius: 10px;
+	border: 2px solid black;
+	opacity: 1;
+	transition: all .2s;
+	z-index: 1;
 	&:hover {
 		opacity: .95;
 		background: rgba(#000, .8);
@@ -53,6 +76,7 @@
 	border-radius: 10px;
 	background: rgba(#000, .8);
 	color: #fff;
+	z-index: 1;
 }
 
 .modal_active {
@@ -161,4 +185,78 @@ ul.modal__colors {
 
 .white {
 	background: #fff;
+}
+
+.modal__input-block {
+	margin: 5px 0 5px 0;
+	height: 40px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.modal__input {
+	width: 90%;
+	padding: 0 10px;
+	outline: none;
+	border: none;
+	flex: 1 1 50px;
+	font-size: 15px;
+	font-family: verdana;
+}
+
+.modal__place {
+	line-height: 40px;
+	flex-basis: 60px;
+	text-align: center;
+	text-transform: uppercase;
+	font-size: 12px;
+	opacity: .95;
+	background: rgba(#000, .8);
+	color: #fff;
+	cursor: pointer;
+	border: 0;
+	outline: none;
+	line-height: 100%;
+}
+
+.text-canvas {
+	position: absolute;
+	top: 80px;
+	left: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 40px;
+	padding: 0px 15px;
+	border: 1px dashed black;
+	cursor: move;
+}
+
+.text-icon {
+	position: absolute;
+	top: 0%;
+	left: 100%;
+	width: 40px;
+	max-height: 40px;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	font-size: 16px;
+	color: #fff;
+	opacity: 0.8;
+	&:hover {
+		opacity: 1;
+	}
+}
+
+.text-cancel {
+	transform: translate(0,50%);
+	background: #fe3e3d;
+}
+
+.text-ok {
+	transform: translate(0,-50%);
+	background: #98cb00;
 }
