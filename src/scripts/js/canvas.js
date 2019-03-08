@@ -10,8 +10,13 @@ function canvasPaint(canvasBlock) {
 	var lineWidth = 12;
 	var color = "red";
 	var ctx = c.getContext("2d");
+	var btn = document.querySelector(".settings");
+	var modal = document.querySelector(".modal");
+	var btnClose = document.querySelector(".modal__btn-close");
 	var clears = document.querySelector(".clear");
 	var saveBtn = document.querySelector(".save");
+	var subtitles = document.querySelectorAll(".modal__subtitle");
+	var inputBlock = document.querySelector(".modal__input-block")
 	var textBtn = document.querySelector(".modal__place");
 	var textInput = document.querySelector(".modal__input");
 	var fontFamily = "Verdana";
@@ -22,15 +27,17 @@ function canvasPaint(canvasBlock) {
 	var textSpan;
 
 
-	// -- Проверим есть ли тачскрин -- //
-	function is_touch_device() {
-  	return 'ontouchstart' in window;
-	}
 
 	pcPaint();
 	touchPaint();
 
 
+	if(device.mobile()) {
+		btn.classList.add("settings_mobile");
+		subtitles[2].classList.add("modal__subtitle_mobile");
+		saveBtn.classList.add("save_mobile");
+		inputBlock.classList.add("modal__input-block_mobile");
+	}
 
 	// -- Выполнится если нет тачскрина -- //
 	function pcPaint() {
@@ -150,10 +157,6 @@ function canvasPaint(canvasBlock) {
 
 
 	//-- Модальное окно --//
-	var btn = document.querySelector(".settings");
-	var modal = document.querySelector(".modal");
-	var btnClose = document.querySelector(".modal__btn-close");
-
 	btn.addEventListener("click", (e) => {
 		e.stopPropagation();
 		modal.classList.add("modal_active");
@@ -264,30 +267,6 @@ function canvasPaint(canvasBlock) {
 
 
 	})
-
-
-	//-- Добавление драг&дроп для блока (тачпад)--//
-		document.addEventListener("touchstart", (e) => {
-			if(textSpan) {
-				if(e.target == textSpan) {
-
-					function cancelDrag() {
-						document.removeEventListener("touchend", cancelDrag);
-						document.removeEventListener("touchmove", touchDrag);
-					}
-
-					function touchDrag(e) {
-						textSpan.style.left = e.changedTouches[0].pageX - textSpan.offsetWidth  / 2 + 'px';
-		    		textSpan.style.top  = e.changedTouches[0].pageY - textSpan.offsetHeight / 2 + 'px';
-					}
-
-					document.addEventListener("mousemove", touchDrag);
-					document.addEventListener("touchend", cancelDrag);
-				}else return;
-			}
-		});
-
-			
 
 
 
