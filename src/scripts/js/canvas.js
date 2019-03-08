@@ -19,22 +19,22 @@ function canvasPaint(canvasBlock) {
 	var textX = 100;
 	var textY = 100;
 	ctx.font = `${lineWidth}px ${fontFamily}`;
+	var textSpan;
 
 
 	// -- Проверим есть ли тачскрин -- //
 	function is_touch_device() {
-  	return !!('ontouchstart' in window);
+  	return 'ontouchstart' in window;
 	}
 
-	if(is_touch_device) {
-		pcPaint();
-	} else {
-		touchPaint();
-	}
+	pcPaint();
+	touchPaint();
+
 
 
 	// -- Выполнится если нет тачскрина -- //
 	function pcPaint() {
+		console.log("pc");
 		c.addEventListener("mousedown", e => {
 			ctx.beginPath();
 			ctx.fillStyle = color;
@@ -66,10 +66,11 @@ function canvasPaint(canvasBlock) {
 
 	// -- Выполнится если есть тачскрин -- //
 	function touchPaint() {
-		lastCoords = {};
+		console.log("touch");
+		var lastCoords = {};
 
 		document.addEventListener("touchstart", (e) => {
-			e.preventDefault();
+			// e.preventDefault();
 			for(var i = 0; i < e.changedTouches.length; i++) {
 				var touch = e.changedTouches[i];
 				lastCoords[touch.identifier] = {x: touch.pageX, y: touch.pageY}
@@ -77,22 +78,22 @@ function canvasPaint(canvasBlock) {
 		})
 
 		document.addEventListener("touchmove", (e) => {
-			e.preventDefault();
+			// e.preventDefault();
 			for(var i = 0; i < e.changedTouches.length; i++) {
 				var touch = e.changedTouches[i];
 
 				ctx.fillStyle = color;
 				ctx.strokeStyle = color;
 				ctx.lineWidth = lineWidth*2;
-				
-				ctx.beginPath();
 
-				ctx.arc(touch.pageX, touch.pageY, lineWidth, 0, Math.PI*2);
-				ctx.fill();
-
-				ctx.moveTo(lastCoords[touch.identifier].x, lastCoords[touch.identifier].y);
 				ctx.lineTo(touch.pageX, touch.pageY);
 				ctx.stroke();
+				ctx.beginPath();
+				ctx.arc(touch.pageX, touch.pageY, lineWidth, 0, Math.PI*2);
+				
+				ctx.fill();
+				ctx.beginPath();
+				ctx.moveTo(lastCoords[touch.identifier].x, lastCoords[touch.identifier].y);
 
 				lastCoords[touch.identifier] = {x: touch.pageX, y: touch.pageY};
 
@@ -106,6 +107,7 @@ function canvasPaint(canvasBlock) {
 				var touch = e.changedTouches[i];
 				delete lastCoords[touch.identifier];
 			}
+			ctx.beginPath();
 		}
 	}
 
@@ -192,9 +194,8 @@ function canvasPaint(canvasBlock) {
 	//-- Добавление блока с текстом на страницу --//
 	textBtn.addEventListener("click", (e) => {
 		text = textInput.value;
-		
 
-		var textSpan = document.createElement("span");
+		textSpan = document.createElement("span");
 		var textOk = document.createElement("span");
 		var textCancel = document.createElement("span");
 		var iconCancel = document.createElement("i");
@@ -262,8 +263,31 @@ function canvasPaint(canvasBlock) {
 
 
 
-
 	})
+
+
+	//-- Добавление драг&дроп для блока (тачпад)--//
+		document.addEventListener("touchstart", (e) => {
+			if(textSpan) {
+				if(e.target == textSpan) {
+
+					function cancelDrag() {
+						document.removeEventListener("touchend", cancelDrag);
+						document.removeEventListener("touchmove", touchDrag);
+					}
+
+					function touchDrag(e) {
+						textSpan.style.left = e.changedTouches[0].pageX - textSpan.offsetWidth  / 2 + 'px';
+		    		textSpan.style.top  = e.changedTouches[0].pageY - textSpan.offsetHeight / 2 + 'px';
+					}
+
+					document.addEventListener("mousemove", touchDrag);
+					document.addEventListener("touchend", cancelDrag);
+				}else return;
+			}
+		});
+
+			
 
 
 
