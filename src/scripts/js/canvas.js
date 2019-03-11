@@ -4,6 +4,7 @@
 function canvasPaint(canvasBlock) {
 
 	//-- Общие настройки холста --//
+	var prevBlock = document.getElementsByClassName("previous")[0];
 	var c = canvasBlock;
 	c.width = window.innerWidth;
 	c.height = window.innerHeight;
@@ -26,6 +27,11 @@ function canvasPaint(canvasBlock) {
 	ctx.font = `${lineWidth}px ${fontFamily}`;
 	var textSpan;
 
+
+	//-- Приветствие --//
+	var prevShow = setTimeout(function(){
+		prevBlock.remove();
+	}, 5500)
 
 
 	pcPaint();

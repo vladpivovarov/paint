@@ -143,48 +143,62 @@ ul.modal__colors {
 
 .red {
 	background: #fe3e3d;
+	color: #fe3e3d;
 }
 .orange {
 	background: #fe8802;
+	color: #fe8802;
 }
 .orange2 {
 	background: #febb2f;
+	color: #febb2f;
 }
 .green {
 	background: #98cb00;
+	color: #98cb00;
 }
 .blue {
 	background: #009acc;
+	color: #009acc;
 }
 .blue2 {
 	background: #2cb4e6;
+	color: #2cb4e6;
 }
 .pink {
 	background: #ef96e4;
+	color: #ef96e4;
 }
 .pink2 {
 	background: #e82f73;
+	color: #e82f73;
 }
 .yellow {
 	background: #fef220;
+	color: #fef220;
 }
 .gray {
 	background: #ebecf2;
+	color: #ebecf2;
 }
 .gray2 {
 	background: #726e69;
+	color: #726e69;
 }
 
 .gray3 {
 	background: #3e3e3e;
+	color: #3e3e3e;
 }
 
 .black {
 	background: #000;
+	color: #000;
 }
 
 .white {
 	background: #fff;
+	color: #fff;
 }
 
 .modal__input-block {
@@ -279,4 +293,42 @@ ul.modal__colors {
 
 .settings_mobile {
 	right: 60px;
+}
+
+.previous {
+	position: absolute;
+	padding: 20px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.previous__text {
+	text-align: center;
+	font-size: 18px;
+}
+
+.previous__svg-block {
+	height: 300px;
+}
+
+.previous__svg {
+	height: 100%;
+  stroke: black;
+  stroke-width: 2px;
+  fill: none;
+  animation: animation 5s forwards;
+}
+
+@keyframes animation {
+	0% {
+		stroke-dasharray: 0% 100%;
+	}
+	80% {
+		fill: white;
+	}
+	100% {
+		stroke-dasharray: 100% 0%;
+		fill: black;
+	}
 }
