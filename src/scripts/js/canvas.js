@@ -84,12 +84,11 @@ function canvasPaint(canvasBlock) {
 		var lastCoords = {};
 
 		document.addEventListener("touchstart", (e) => {
-			// e.preventDefault();
 			for(var i = 0; i < e.changedTouches.length; i++) {
 				var touch = e.changedTouches[i];
 				lastCoords[touch.identifier] = {x: touch.pageX, y: touch.pageY}
 			}
-		})
+		}, {passive: false})
 
 		document.addEventListener("touchmove", (e) => {
 			e.preventDefault();
@@ -112,7 +111,7 @@ function canvasPaint(canvasBlock) {
 				lastCoords[touch.identifier] = {x: touch.pageX, y: touch.pageY};
 
 			}
-		})
+		}, {passive: false})
 
 		document.addEventListener("touchend", touchCancel);
 
