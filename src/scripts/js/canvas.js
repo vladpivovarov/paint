@@ -37,10 +37,10 @@ function canvasPaint(canvasBlock) {
 	if(device.mobile() || device.tablet()) {
 		touchPaint();
 
-		btn.classList.add("settings_mobile");
-		subtitles[2].classList.add("modal__subtitle_mobile");
-		saveBtn.classList.add("save_mobile");
-		inputBlock.classList.add("modal__input-block_mobile");
+		// btn.classList.add("settings_mobile");
+		// subtitles[2].classList.add("modal__subtitle_mobile");
+		// saveBtn.classList.add("save_mobile");
+		// inputBlock.classList.add("modal__input-block_mobile");
 	}
 	if(device.desktop()) {
 		pcPaint();
@@ -79,18 +79,9 @@ function canvasPaint(canvasBlock) {
 
 
 	// -- Выполнится если есть тачскрин -- //
-	function touchPaint() {
-		console.log("touch");
-		var lastCoords = {};
-
-		document.addEventListener("touchstart", (e) => {
-			for(var i = 0; i < e.changedTouches.length; i++) {
-				var touch = e.changedTouches[i];
-				lastCoords[touch.identifier] = {x: touch.pageX, y: touch.pageY}
-			}
-		}, {passive: false})
-
-		document.addEventListener("touchmove", (e) => {
+	var lastCoords = {};
+	document.addEventListener("touchmove", touchDraw, {passive: false});
+	function touchDraw(e) {
 			e.preventDefault();
 			for(var i = 0; i < e.changedTouches.length; i++) {
 				var touch = e.changedTouches[i];
@@ -109,9 +100,19 @@ function canvasPaint(canvasBlock) {
 				ctx.moveTo(lastCoords[touch.identifier].x, lastCoords[touch.identifier].y);
 
 				lastCoords[touch.identifier] = {x: touch.pageX, y: touch.pageY};
+			}
+		}
 
+	function touchPaint() {
+		console.log("touch");
+
+		document.addEventListener("touchstart", (e) => {
+			for(var i = 0; i < e.changedTouches.length; i++) {
+				var touch = e.changedTouches[i];
+				lastCoords[touch.identifier] = {x: touch.pageX, y: touch.pageY}
 			}
 		}, {passive: false})
+
 
 		document.addEventListener("touchend", touchCancel);
 
@@ -193,10 +194,15 @@ function canvasPaint(canvasBlock) {
 		var link = document.createElement('a');
 		link.download = 'mypicture.png';
 		link.href = c.toDataURL("image/png").replace("image/png", "image/octet-stream");
+
 		link.click();
 	}
 
 	saveBtn.addEventListener("click", (e) => {
+		download();
+	})
+
+	saveBtn.addEventListener("touchstart", (e) => {
 		download();
 	})
 
@@ -243,18 +249,27 @@ function canvasPaint(canvasBlock) {
 		//-- Размещение текста в canvas --//
 		textOk.addEventListener("click", (e) => {
 			e.stopPropagation();
+			var target = e.target.closest(".text-canvas");
+
 			ctx.fillStyle = color;
-			ctx.font = `${lineWidth}px ${fontFamily}`;
+			ctx.font = `${target.style.fontSize} ${fontFamily}`;
 			ctx.textAlign = "center";
 			ctx.textBaseline="middle";
-			ctx.fillText(text, textSpan.offsetLeft + textSpan.offsetWidth/2, textSpan.offsetTop + textSpan.offsetHeight/2);
+			ctx.fillText(text, target.offsetLeft + target.offsetWidth/2, target.offsetTop + target.offsetHeight/2);
 			textCancel.click();
 		}, true);
 
 
 		//-- Добавление драг&дроп для блока --//
-		textSpan.addEventListener("mousedown", (e) => {
-			e.preventDefault();
+
+		document.body.addEventListener("mousedown", (event) => {
+			var target = event.target;
+			if(target.className != "text-canvas") return;
+			event.preventDefault();
+
+			document.addEventListener("mousemove", mousemoveDrag);
+			document.addEventListener("mouseup", cancelDrag);
+
 			function cancelDrag() {
 				document.removeEventListener("mouseup", cancelDrag);
 				document.removeEventListener("mousemove", mousemoveDrag);
@@ -262,12 +277,39 @@ function canvasPaint(canvasBlock) {
 
 			function mousemoveDrag(e) {
 				e.preventDefault();
-				textSpan.style.left = e.pageX - textSpan.offsetWidth  / 2 + 'px';
-    		textSpan.style.top  = e.pageY - textSpan.offsetHeight / 2 + 'px';
+				target.style.left = e.pageX - target.offsetWidth  / 2 + 'px';
+	    	target.style.top  = e.pageY - target.offsetHeight / 2 + 'px';
 			}
 
-			document.addEventListener("mousemove", mousemoveDrag);
-			document.addEventListener("mouseup", cancelDrag);
+		});
+
+
+		document.body.addEventListener("touchstart", (event) => {
+			
+			var target = event.touches[0].target;
+			
+			if(target.className != "text-canvas") {
+				document.addEventListener("touchmove", touchDraw, {passive: false});
+				return;
+			};
+
+			document.removeEventListener("touchmove", touchDraw);
+
+			document.addEventListener("touchmove", touchmoveDrag, {passive: false});
+			document.addEventListener("touchup", cancelTouchDrag);
+
+			function cancelTouchDrag() {
+				document.removeEventListener("touchend", cancelTouchDrag);
+				document.removeEventListener("touchmove", touchmoveDrag);
+			}
+
+			function touchmoveDrag(e) {
+				var targetM = e.touches[0].target.closest(".text-canvas");
+				e.preventDefault();
+				targetM.style.left = e.touches[0].pageX - targetM.offsetWidth  / 2 + 'px';
+	    	targetM.style.top  = e.touches[0].pageY - targetM.offsetHeight / 2 + 'px';
+			}
+
 		});
 
 
