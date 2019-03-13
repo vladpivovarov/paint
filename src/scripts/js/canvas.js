@@ -34,15 +34,16 @@ function canvasPaint(canvasBlock) {
 	}, 5500)
 
 
-	pcPaint();
-	touchPaint();
+	if(device.mobile() || device.tablet()) {
+		touchPaint();
 
-
-	if(device.mobile()) {
 		btn.classList.add("settings_mobile");
 		subtitles[2].classList.add("modal__subtitle_mobile");
 		saveBtn.classList.add("save_mobile");
 		inputBlock.classList.add("modal__input-block_mobile");
+	}
+	if(device.desktop()) {
+		pcPaint();
 	}
 
 	// -- Выполнится если нет тачскрина -- //
@@ -91,7 +92,7 @@ function canvasPaint(canvasBlock) {
 		})
 
 		document.addEventListener("touchmove", (e) => {
-			// e.preventDefault();
+			e.preventDefault();
 			for(var i = 0; i < e.changedTouches.length; i++) {
 				var touch = e.changedTouches[i];
 
