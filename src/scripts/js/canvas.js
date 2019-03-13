@@ -35,12 +35,13 @@ function canvasPaint(canvasBlock) {
 
 
 	if(device.mobile() || device.tablet()) {
-		touchPaint();
+		
 
 		btn.classList.add("settings_mobile");
 		// subtitles[2].classList.add("modal__subtitle_mobile");
 		saveBtn.classList.add("save_mobile");
 		// inputBlock.classList.add("modal__input-block_mobile");
+		touchPaint();
 	}
 	if(device.desktop()) {
 		pcPaint();
