@@ -37,9 +37,9 @@ function canvasPaint(canvasBlock) {
 	if(device.mobile() || device.tablet()) {
 		touchPaint();
 
-		// btn.classList.add("settings_mobile");
+		btn.classList.add("settings_mobile");
 		// subtitles[2].classList.add("modal__subtitle_mobile");
-		// saveBtn.classList.add("save_mobile");
+		saveBtn.classList.add("save_mobile");
 		// inputBlock.classList.add("modal__input-block_mobile");
 	}
 	if(device.desktop()) {
@@ -196,11 +196,9 @@ function canvasPaint(canvasBlock) {
 		link.href = c.toDataURL("image/png").replace("image/png", "image/octet-stream");
 
 		link.click();
-	}
+		link.touchstart();
 
-	saveBtn.addEventListener("click", (e) => {
-		download();
-	})
+	}
 
 	saveBtn.addEventListener("touchstart", (e) => {
 		download();
