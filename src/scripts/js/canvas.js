@@ -197,11 +197,9 @@ function canvasPaint(canvasBlock) {
 		link.href = c.toDataURL("image/png").replace("image/png", "image/octet-stream");
 
 		link.click();
-		link.touchstart();
-
 	}
 
-	saveBtn.addEventListener("touchstart", (e) => {
+	saveBtn.addEventListener("click", (e) => {
 		download();
 	})
 
